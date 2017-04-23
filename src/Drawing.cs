@@ -1,6 +1,7 @@
 ﻿using System;
 using SwinGameSDK;
 using System.Collections.Generic;
+using System.IO; 
 
 namespace MyGame
 {
@@ -80,6 +81,57 @@ namespace MyGame
 		public void RemoveShape(Shape s)
 		{
 			_shapes.Remove (s);
+		}
+
+		public void Save (string filename)
+		{
+			StreamWriter writer;
+
+			writer = new StreamWriter (filename);
+			try {
+				writer.WriteLine (Background.ToArgb ());
+				writer.WriteLine (ShapeCount);
+
+				foreach (Shape s in _shapes) {
+					s.SaveTo (writer);
+				}
+			} finally {
+				writer.Close ();
+			}
+		}
+
+		public void Load (string filename)
+		{
+			int count;
+			Shape s;
+			string kind;
+
+			StreamReader reader = new StreamReader (filename);
+			try {
+				Background = Color.FromArgb (reader.ReadInteger ());
+				count = reader.ReadInteger ();
+
+				for (int i = 0; i < count; i++) {
+					kind = reader.ReadLine ();
+					switch (kind) {
+					case  "Rectangle":
+						s = new Rectangle ();
+						break;
+					case "Circle":
+						s = new Circle ();
+						break;
+					case "Line":
+						s = new Line ();
+						break;
+					default:
+						throw new InvalidDataException ("Unknown shape kind: " + kind);
+					}
+					s.LoadFrom (reader);
+					AddShape (s);
+				}
+			} finally {
+				reader.Close ();
+			}
 		}
 	}
 }

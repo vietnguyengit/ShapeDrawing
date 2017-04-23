@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using SwinGameSDK;
 
 namespace MyGame
@@ -74,6 +75,25 @@ namespace MyGame
 		public override bool IsAt (Point2D pt)
 		{
 			return SwinGame.PointOnLine (pt, _x1, _y1, _x2, _y2);
+		}
+
+		public override void SaveTo (StreamWriter writer)
+		{
+			writer.WriteLine ("Line");
+			base.SaveTo (writer);
+			writer.WriteLine (X1);
+			writer.WriteLine (X2);
+			writer.WriteLine (Y1);
+			writer.WriteLine (Y2);
+		}
+
+		public override void LoadFrom (StreamReader reader)
+		{
+			base.LoadFrom (reader);
+			X1 = reader.ReadInteger();
+			X2 = reader.ReadInteger();
+			Y1 = reader.ReadInteger();
+			Y2 = reader.ReadInteger();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using SwinGameSDK;
+using System.IO;
 
 namespace MyGame
 {
@@ -55,6 +56,21 @@ namespace MyGame
 		public override bool IsAt (Point2D pt)
 		{
 			return SwinGame.PointInRect (pt, X, Y, _width, _height);
+		}
+
+		public override void SaveTo (StreamWriter writer)
+		{
+			writer.WriteLine ("Rectangle");
+			base.SaveTo(writer);
+			writer.WriteLine (Width);
+			writer.WriteLine (Height);
+		}
+
+		public override void LoadFrom (StreamReader reader)
+		{
+			base.LoadFrom (reader);
+			Width = reader.ReadInteger();
+			Height = reader.ReadInteger();
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.IO;
 using SwinGameSDK;
 
 namespace MyGame
@@ -53,6 +54,20 @@ namespace MyGame
 			set {
 				_selected = value;
 			}
+		}
+
+		public virtual void SaveTo (StreamWriter writer)
+		{
+			writer.WriteLine (Color.ToArgb ());
+			writer.WriteLine (X);
+			writer.WriteLine (Y);
+		}
+
+		public virtual void LoadFrom (StreamReader reader)
+		{
+			Color = Color.FromArgb (reader.ReadInteger ());
+			X = reader.ReadInteger();
+			Y = reader.ReadInteger();
 		}
 	}
 }

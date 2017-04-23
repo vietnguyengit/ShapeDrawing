@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using SwinGameSDK;
 
 namespace MyGame
@@ -80,9 +81,24 @@ namespace MyGame
 					kindToAdd = ShapeKind.Line;
 				}
 
+				if (SwinGame.KeyTyped (KeyCode.SKey))
+				{
+					string fileLoc = @"/Users/devnguyen/Desktop/TestDrawing.txt";
+					myDrawing.Save (fileLoc);
+				}
+
+				if (SwinGame.KeyTyped (KeyCode.OKey))
+				{
+					try {
+						string fileLoc = @"/Users/devnguyen/Desktop/TestDrawing.txt";
+						myDrawing.Load (fileLoc);
+					} catch (Exception e) {
+						Console.Error.WriteLine ("Error loading file: {0}", e.Message);
+					}
+				}
+
  			SwinGame.RefreshScreen (60);
 			}
-
 		}
 	}
 }
