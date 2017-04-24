@@ -113,7 +113,7 @@ namespace MyGame
 
 				for (int i = 0; i < count; i++) {
 					kind = reader.ReadLine ();
-					switch (kind) {
+					/*switch (kind) {
 					case  "Rectangle":
 						s = new Rectangle ();
 						break;
@@ -125,7 +125,8 @@ namespace MyGame
 						break;
 					default:
 						throw new InvalidDataException ("Unknown shape kind: " + kind);
-					}
+					}*/
+					s = Shape.CreateShape (kind);
 					s.LoadFrom (reader);
 					AddShape (s);
 				}

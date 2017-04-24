@@ -79,7 +79,7 @@ namespace MyGame
 
 		public override void SaveTo (StreamWriter writer)
 		{
-			writer.WriteLine ("Line");
+			//writer.WriteLine ("Line");
 			base.SaveTo (writer);
 			writer.WriteLine (X1);
 			writer.WriteLine (X2);

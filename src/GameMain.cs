@@ -13,6 +13,10 @@ namespace MyGame
 
 		public static void Main ()
 		{
+			Shape.RegisterShape ("Rectangle", typeof (Rectangle));
+			Shape.RegisterShape ("Circle", typeof (Circle));
+			Shape.RegisterShape ("Line", typeof (Line));
+
 			ShapeKind kindToAdd = ShapeKind.Circle;
 
 			SwinGame.OpenGraphicsWindow ("GameMain", 800, 600);

@@ -60,7 +60,7 @@ namespace MyGame
 
 		public override void SaveTo (StreamWriter writer)
 		{
-			writer.WriteLine ("Rectangle");
+			//writer.WriteLine ("Rectangle");
 			base.SaveTo(writer);
 			writer.WriteLine (Width);
 			writer.WriteLine (Height);
